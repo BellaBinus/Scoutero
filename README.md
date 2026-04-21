@@ -102,13 +102,3 @@ pnpm --filter @workspace/api-spec run codegen
 ```bash
 pnpm run typecheck
 ```
-
-## Admin access
-
-The first user to sign in can be granted admin rights directly in the database:
-
-```sql
-UPDATE users SET is_admin = true WHERE id = '<clerk-user-id>';
-```
-
-Admins can manage the company list, view the ops log, and trigger health scans.
