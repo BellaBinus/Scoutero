@@ -2,20 +2,6 @@
 
 Scoutero is a job scouting app that tracks fintech company career pages and surfaces relevant roles based on user-defined signals. Instead of relying on job boards, it allows users to monitor specific companies and run targeted searches when needed.
 
-## Screenshots
-
-### Jobs
-![Jobs](./screenshots/Jobs.png)
-
-### Keywords
-![Keywords](./screenshots/Keywords.png)
-
-### Main Page
-![Main Page](./screenshots/Main_page.png)
-
-### Company List
-![Company List](./screenshots/Main_page_companies.png)
-
 ## How it works
 - Tracks job postings from company career pages 
 - Allows users to run scans on demand
@@ -33,7 +19,23 @@ Scoutero was built out of frustration with job aggregators like LinkedIn, where 
 - **Adjustable match threshold** — control how strictly roles are matched
 - **Role tracking** — mark roles as saved, applied, or irrelevant
 - **Search history** — revisit previous scans
-- 
+
+  
+## Screenshots
+
+### Jobs
+![Jobs](./screenshots/Jobs.png)
+
+### Keywords
+![Keywords](./screenshots/Keywords.png)
+
+### Main Page
+![Main Page](./screenshots/Main_page.png)
+
+### Company List
+![Company List](./screenshots/Main_page_companies.png)
+
+
 ## Tech stack
 
 - Frontend: React, Vite, TypeScript, Tailwind CSS
