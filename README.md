@@ -2,8 +2,6 @@
 
 A personal job scouting app that monitors target companies' careers pages for relevant openings and surfaces them in one place.
 
-![Scoutero](attached_assets/scoutero-preview.jpg)
-
 ## What it does
 
 - **Track companies** — maintain a list of companies whose careers pages you want to watch
@@ -114,7 +112,3 @@ UPDATE users SET is_admin = true WHERE id = '<clerk-user-id>';
 ```
 
 Admins can manage the company list, view the ops log, and trigger health scans.
-
-## License
-
-MIT
