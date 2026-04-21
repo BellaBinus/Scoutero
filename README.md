@@ -4,19 +4,18 @@ Scoutero is a job scouting app that tracks fintech company career pages and surf
 
 ## How it works
 - Tracks job postings from company career pages 
-- Allows users to run scans on demand
+- Run scans on demand across tracked companies
 - Filters results using keyword inclusion and exclusion
 - Surfaces relevant roles with timestamps and tags for quick review
 
 ## Why I Built This
-Scoutero was built out of frustration with job aggregators like LinkedIn, where algorithms often produce too much noise. My own job search focused on a niche area, financial crime and fraud, where a more targeted approach is needed. Scoutero gives users control over where they search, what signals they use, and how results are surfaced.
+Scoutero was built out of frustration with job aggregators like LinkedIn, where algorithms often produce too much noise. My own job search focused on a niche area, financial crime and fraud, where a more targeted approach is needed. Scoutero gives users control over where they search, what signals they use, and how results are surfaced. Unlike job boards, Scoutero does not rely on ranking algorithms — it lets users define their own signals and search criteria.
 
 ## Key Features
 
 - **Company tracking** — maintain a list of target companies
 - **On-demand scanning** — run searches when it makes sense for you
-- **Keyword filtering** — define inclusion and exclusion signals
-- **Adjustable match threshold** — control how strictly roles are matched
+- **Keyword filtering** — define inclusion and exclusion signals, and matching sensitivity
 - **Role tracking** — mark roles as saved, applied, or irrelevant
 - **Search history** — revisit previous scans
 
