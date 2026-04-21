@@ -1,0 +1,13 @@
+packages:
+  "framer-motion": "For page transitions, fluid list animations, and polished micro-interactions"
+  "date-fns": "For formatting search history dates and job posting times into human-readable strings"
+  "react-hook-form": "For robust form state management with target companies and search queries"
+  "@hookform/resolvers": "For integrating Zod validation with react-hook-form"
+  "zod": "For schema validation on frontend forms to match backend expectations"
+  "clsx": "For conditional class name merging in reusable components"
+  "tailwind-merge": "For resolving tailwind class conflicts seamlessly"
+
+notes:
+  - Using generated Orval hooks from @workspace/api-client-react for all API interactions
+  - Assuming lucide-react is available for icons as per standard stack
+  - The UI uses an app-shell layout with a sidebar for navigation between Search, Companies, and History

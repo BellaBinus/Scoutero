@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "yXDAWqS7qFUu89Ezo1TS_"
+uri = "file://all_jobs.csv"
+type = "table"
+title = "All Jobs (406 rows)"

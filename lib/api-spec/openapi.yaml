@@ -1,0 +1,531 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: Job Scout API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: companies
+    description: Target company management
+  - name: searches
+    description: Job search operations
+  - name: jobs
+    description: Job listing results
+  - name: keywords
+    description: Saved search keyword management
+  - name: me
+    description: Current user info
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /me:
+    get:
+      operationId: getMe
+      tags: [me]
+      summary: Get current user info (admin status)
+      responses:
+        "200":
+          description: Current user info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /companies:
+    get:
+      operationId: listCompanies
+      tags: [companies]
+      summary: List all target companies
+      responses:
+        "200":
+          description: List of companies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Company"
+    post:
+      operationId: createCompany
+      tags: [companies]
+      summary: Add a target company
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCompanyInput"
+      responses:
+        "201":
+          description: Company created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Company"
+
+  /companies/{id}:
+    patch:
+      operationId: updateCompany
+      tags: [companies]
+      summary: Update a target company
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCompanyInput"
+      responses:
+        "200":
+          description: Company updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Company"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      operationId: deleteCompany
+      tags: [companies]
+      summary: Remove a target company
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Company deleted
+
+  /searches:
+    get:
+      operationId: listSearches
+      tags: [searches]
+      summary: List past searches
+      responses:
+        "200":
+          description: List of searches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Search"
+    post:
+      operationId: runSearch
+      tags: [searches]
+      summary: Run a new job search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RunSearchInput"
+      responses:
+        "201":
+          description: Search created and results returned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchWithJobs"
+
+  /searches/{id}:
+    get:
+      operationId: getSearch
+      tags: [searches]
+      summary: Get a search and its job results
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Search with jobs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchWithJobs"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /searches/{id}/jobs:
+    get:
+      operationId: listJobsForSearch
+      tags: [jobs]
+      summary: Get all job listings for a search
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Job listings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/JobListing"
+
+  /jobs:
+    get:
+      operationId: listJobs
+      tags: [jobs]
+      summary: List all job listings
+      responses:
+        "200":
+          description: List of job listings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/JobListing"
+
+  /jobs/{id}/status:
+    patch:
+      operationId: updateJobStatus
+      tags: [jobs]
+      summary: Update the status of a job listing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateJobStatusInput"
+      responses:
+        "200":
+          description: Job status updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobListing"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /keywords:
+    get:
+      operationId: listKeywords
+      tags: [keywords]
+      summary: List all saved search keywords
+      responses:
+        "200":
+          description: List of keywords
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Keyword"
+    post:
+      operationId: createKeyword
+      tags: [keywords]
+      summary: Save a search keyword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateKeywordInput"
+      responses:
+        "201":
+          description: Keyword created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Keyword"
+
+  /keywords/{id}:
+    delete:
+      operationId: deleteKeyword
+      tags: [keywords]
+      summary: Remove a saved keyword
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Keyword deleted
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    MeResponse:
+      type: object
+      properties:
+        isAdmin:
+          type: boolean
+      required:
+        - isAdmin
+
+    Company:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        careersUrl:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - careersUrl
+        - createdAt
+
+    CreateCompanyInput:
+      type: object
+      properties:
+        name:
+          type: string
+        careersUrl:
+          type: string
+          nullable: true
+      required:
+        - name
+
+    UpdateCompanyInput:
+      type: object
+      properties:
+        name:
+          type: string
+        careersUrl:
+          type: string
+          nullable: true
+
+    UpdateJobStatusInput:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [new, saved, applied, removed]
+      required:
+        - status
+
+    Keyword:
+      type: object
+      properties:
+        id:
+          type: integer
+        term:
+          type: string
+        type:
+          type: string
+          enum: [include, exclude]
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - term
+        - type
+        - createdAt
+
+    CreateKeywordInput:
+      type: object
+      properties:
+        term:
+          type: string
+        type:
+          type: string
+          enum: [include, exclude]
+      required:
+        - term
+
+    Search:
+      type: object
+      properties:
+        id:
+          type: integer
+        keywords:
+          type: string
+        status:
+          type: string
+          enum: [pending, running, completed, failed]
+        jobCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - keywords
+        - status
+        - jobCount
+        - createdAt
+
+    RunSearchInput:
+      type: object
+      properties:
+        keywords:
+          type: string
+        companyIds:
+          type: array
+          items:
+            type: integer
+          nullable: true
+        location:
+          type: object
+          nullable: true
+          properties:
+            usRemote:
+              type: boolean
+            usLocal:
+              type: boolean
+            city:
+              type: string
+            radiusMiles:
+              type: number
+          required:
+            - usRemote
+            - usLocal
+            - city
+            - radiusMiles
+      required:
+        - keywords
+
+    JobListing:
+      type: object
+      properties:
+        id:
+          type: integer
+        searchId:
+          type: integer
+        companyId:
+          type: integer
+        companyName:
+          type: string
+        title:
+          type: string
+        location:
+          type: string
+          nullable: true
+        url:
+          type: string
+        description:
+          type: string
+          nullable: true
+        postedAt:
+          type: string
+          nullable: true
+        matchedKeywords:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [new, saved, applied, removed]
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - searchId
+        - companyId
+        - companyName
+        - title
+        - location
+        - url
+        - description
+        - postedAt
+        - matchedKeywords
+        - status
+        - createdAt
+
+    SearchWithJobs:
+      type: object
+      properties:
+        id:
+          type: integer
+        keywords:
+          type: string
+        status:
+          type: string
+          enum: [pending, running, completed, failed]
+        jobCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        jobs:
+          type: array
+          items:
+            $ref: "#/components/schemas/JobListing"
+      required:
+        - id
+        - keywords
+        - status
+        - jobCount
+        - createdAt
+        - jobs
