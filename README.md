@@ -1,104 +1,56 @@
 # Scoutero
 
-Job scouting app that tracks fintech company career pages and surfaces relevant openings.
+Scoutero is a job scouting app that tracks fintech company career pages and surfaces relevant roles based on user-defined signals. Instead of relying on job boards, it allows users to monitor specific companies and run targeted searches when needed.
 
-## What it does
+## Screenshots
 
-- **Track companies** — maintain a list of companies whose careers pages you want to watch
-- **Keyword filtering** — define include and exclude keywords; the scraper uses them to surface only relevant listings
-- **Search history** — every scan is stored so you can revisit past results
-- **Job status tracking** — mark listings as saved, applied, or irrelevant
-- **Admin ops log** — health scans and scrape runs are logged for visibility
+### Jobs
+![Jobs](./screenshots/Jobs.png)
 
+### Keywords
+![Keywords](./screenshots/Keywords.png)
+
+### Main Page
+![Main Page](./screenshots/Main_page.png)
+
+### Company List
+![Company List](./screenshots/Main_page_companies.png)
+
+## How it works
+- Tracks job postings from company career pages 
+- Allows users to run scans on demand
+- Filters results using keyword inclusion and exclusion
+- Surfaces relevant roles with timestamps and tags for quick review
+
+## Why I Built This
+Scoutero was built out of frustration with job aggregators like LinkedIn, where algorithms often produce too much noise. My own job search focused on a niche area, financial crime and fraud, where a more targeted approach is needed. Scoutero gives users control over where they search, what signals they use, and how results are surfaced.
+
+## Key Features
+
+- **Company tracking** — maintain a list of target companies
+- **On-demand scanning** — run searches when it makes sense for you
+- **Keyword filtering** — define inclusion and exclusion signals
+- **Adjustable match threshold** — control how strictly roles are matched
+- **Role tracking** — mark roles as saved, applied, or irrelevant
+- **Search history** — revisit previous scans
+- 
 ## Tech stack
 
-| Layer | Tech |
-|---|---|
-| Frontend | React + Vite, TypeScript, Tailwind CSS, shadcn/ui |
-| Backend | Express 5, TypeScript |
-| Database | PostgreSQL + Drizzle ORM |
-| Auth | Clerk |
-| API contract | OpenAPI spec → Orval codegen (React Query hooks + Zod schemas) |
-| Monorepo | pnpm workspaces |
+- Frontend: React, Vite, TypeScript, Tailwind CSS
+- Backend: Node.js, Express
+- Database: PostgreSQL (Drizzle ORM)
+- Auth: Clerk
+- API client generation: Orval
 
-## Project structure
+## Notes
 
-```
-├── artifacts/
-│   ├── api-server/     # Express API
-│   └── job-scout/      # React + Vite frontend
-├── lib/
-│   ├── api-spec/       # OpenAPI spec + Orval config
-│   ├── api-client-react/  # Generated React Query hooks
-│   ├── api-zod/        # Generated Zod schemas
-│   └── db/             # Drizzle schema + DB connection
-└── scripts/
-```
+- Some backend logic (data ingestion, parsing, and scheduling) is not included in this repository.
 
-## Getting started
+## Future Improvements
 
-### Prerequisites
+- Expanded company coverage
+- Automated scanning options
 
-- Node.js 20+
-- pnpm
-- PostgreSQL database
-- [Clerk](https://clerk.com) account
+## Author
 
-### 1. Clone and install
-
-```bash
-git clone https://github.com/your-username/scoutero.git
-cd scoutero
-pnpm install
-```
-
-### 2. Set environment variables
-
-Copy `.env.example` to `.env` and fill in the values:
-
-```bash
-cp .env.example .env
-```
-
-| Variable | Where to get it |
-|---|---|
-| `DATABASE_URL` | Your PostgreSQL connection string |
-| `CLERK_SECRET_KEY` | Clerk dashboard → API Keys |
-| `VITE_CLERK_PUBLISHABLE_KEY` | Clerk dashboard → API Keys |
-| `VITE_CLERK_PROXY_URL` | Only needed if proxying Clerk through your domain |
-
-### 3. Push the database schema
-
-```bash
-pnpm --filter @workspace/db run push
-```
-
-### 4. Run the app
-
-Start both servers in separate terminals:
-
-```bash
-# API server (default port 3001)
-pnpm --filter @workspace/api-server run dev
-
-# Frontend (default port 5173)
-pnpm --filter @workspace/job-scout run dev
-```
-
-Open `http://localhost:5173`.
-
-## Development
-
-### Regenerate the API client
-
-After changing the OpenAPI spec in `lib/api-spec/`:
-
-```bash
-pnpm --filter @workspace/api-spec run codegen
-```
-
-### Typecheck the whole monorepo
-
-```bash
-pnpm run typecheck
-```
+Bella Binus
