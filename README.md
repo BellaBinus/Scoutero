@@ -1,13 +1,13 @@
 # Scoutero
 
-A personal job scouting app that monitors target companies' careers pages for relevant openings and surfaces them in one place.
+Job scouting app that tracks fintech company career pages and surfaces relevant openings.
 
 ## What it does
 
 - **Track companies** — maintain a list of companies whose careers pages you want to watch
 - **Keyword filtering** — define include and exclude keywords; the scraper uses them to surface only relevant listings
 - **Search history** — every scan is stored so you can revisit past results
-- **Job status tracking** — mark listings as saved, applied, rejected, or ignored
+- **Job status tracking** — mark listings as saved, applied, or irrelevant
 - **Admin ops log** — health scans and scrape runs are logged for visibility
 
 ## Tech stack
