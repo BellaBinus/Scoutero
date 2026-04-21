@@ -23,17 +23,17 @@ Scoutero was built out of frustration with job aggregators like LinkedIn, where 
   
 ## Screenshots
 
-### Jobs
-![Jobs](./screenshots/Jobs.png)
-
-### Keywords
-![Keywords](./screenshots/Keywords.png)
-
 ### Main Page
 ![Main Page](./screenshots/Main_page.png)
 
 ### Company List
 ![Company List](./screenshots/Main_page_companies.png)
+
+### Jobs
+![Jobs](./screenshots/Jobs.png)
+
+### Keywords
+![Keywords](./screenshots/Keywords.png)
 
 
 ## Tech stack
